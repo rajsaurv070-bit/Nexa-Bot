@@ -1,1 +1,73 @@
+
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create Account | Nexa Bot</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html">
+      <span class="mark">N</span>
+      <span>NEXA<span class="gold">BOT</span>
+        <small>GOLD TRADING WORKSPACE</small>
+      </span>
+    </a>
+    <div class="actions">
+      <a class="btn outline" href="index.html">Home</a>
+      <a class="btn goldbtn" href="signin.html">Sign in</a>
+    </div>
+  </header>
+
+  <main class="pagewrap">
+    <section class="card">
+      <div class="eyebrow">CREATE ACCOUNT</div>
+      <h1>Welcome to Nexa Bot</h1>
+      <p>अपना नाम और मोबाइल नंबर डालकर डेमो अकाउंट बनाएँ।</p>
+
+      <form id="genericForm">
+        <label class="field">
+          <span>Full name</span>
+          <input name="name" autocomplete="name"
+            placeholder="आपका नाम" required>
+        </label>
+
+        <label class="field">
+          <span>Mobile number</span>
+          <input type="tel" name="phone" inputmode="tel"
+            autocomplete="tel" placeholder="98765 43210"
+            required minlength="10">
+        </label>
+
+        <label class="field">
+          <span>Email (optional)</span>
+          <input type="email" name="email"
+            autocomplete="email" placeholder="you@example.com">
+        </label>
+
+        <div class="notice">
+          यह डेमो अकाउंट है। जानकारी इसी ब्राउज़र में सेव हो सकती है।
+          OTP या सुरक्षित ऑनलाइन अकाउंट की सुविधा अभी नहीं है।
+          सार्वजनिक फोन पर निजी जानकारी न डालें।
+        </div>
+
+        <div class="message" id="message" role="status"></div>
+
+        <button class="btn goldbtn full" type="submit">
+          Create demo account →
+        </button>
+      </form>
+
+      <div class="switch">
+        पहले अकाउंट बनाया है?
+        <a href="signin.html">Sign in</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Get Started | Nexa Bot</title><link rel="stylesheet" href="styles.css"></head><body><header class="top"><a class="brand" href="index.html"><span class="mark">N</span><span>NEXA<span class="gold">BOT</span><small>GOLD TRADING WORKSPACE</small></span></a><div class="actions"><a class="btn outline" href="index.html">Home</a><a class="btn goldbtn" href="signin.html">Sign in</a></div></header><main class="pagewrap"><section class="card"><div class="eyebrow">GET STARTED</div><h1>Welcome to Nexa Bot</h1><p>Enter your details to continue to the membership options.</p><form id="genericForm"><label class="field"><span>Full name</span><input name="name" autocomplete="name" placeholder="Your name" required></label><label class="field"><span>Mobile number (optional)</span><input type="tel" name="phone" inputmode="tel" autocomplete="tel" placeholder="+91 98765 43210"></label><label class="field"><span>Email (optional)</span><input type="email" name="email" autocomplete="email" placeholder="you@example.com"></label><div class="notice">This is a simple demo form. No password, OTP or authentication is required. Details are not saved or sent to a server in this version.</div><div class="message" id="message" role="status"></div><button class="btn goldbtn full" type="submit">Continue →</button></form><div class="switch">Want to explore first? <a href="index.html#plans">View memberships</a></div></section></main><script src="app.js"></script><script>document.getElementById('genericForm').addEventListener('submit',function(e){e.preventDefault();document.getElementById('message').textContent='Demo only: your details were not saved. Continue to the membership plans to explore Nexa Bot.';document.getElementById('message').className='message good';});</script></body></html>
