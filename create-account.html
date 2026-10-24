@@ -4,239 +4,325 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08111f">
   <title>Create Account | Nexa Bot</title>
   <style>
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       min-height: 100vh;
+      padding: 24px 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
-      background: #07111f;
-      color: #fff;
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #f8fafc;
+      background:
+        radial-gradient(circle at top, #153552 0, transparent 45%),
+        #08111f;
     }
+
     .card {
       width: 100%;
-      max-width: 420px;
-      padding: 28px;
-      background: #101e30;
-      border: 1px solid #263950;
-      border-radius: 18px;
-      box-shadow: 0 15px 45px #0005;
+      max-width: 440px;
+      padding: 32px 25px;
+      border: 1px solid #263c52;
+      border-radius: 22px;
+      background: rgba(14, 27, 43, 0.97);
+      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.35);
     }
+
     .logo {
-      text-align: center;
-      color: #36d6a0;
-      font-size: 30px;
-      font-weight: bold;
+      width: 62px;
+      height: 62px;
+      margin: 0 auto 15px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #00d6a0, #087fce);
+      color: #061421;
+      font-size: 29px;
+      font-weight: 800;
     }
-    h1 { text-align: center; font-size: 25px; }
-    .sub { text-align: center; color: #a9b9cc; font-size: 14px; }
+
+    h1 {
+      margin: 0;
+      text-align: center;
+      font-size: 29px;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      margin: 10px 0 27px;
+      color: #a8b8ca;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
     label {
       display: block;
-      margin: 17px 0 7px;
-      font-size: 14px;
+      margin: 17px 0 8px;
+      color: #e2eaf3;
+      font-size: 13px;
+      font-weight: 700;
     }
+
     input {
       width: 100%;
-      padding: 13px;
-      border-radius: 9px;
-      border: 1px solid #354b64;
-      background: #091525;
-      color: white;
-      font-size: 16px;
+      min-height: 49px;
+      padding: 13px 14px;
+      border: 1px solid #344b62;
+      border-radius: 11px;
       outline: none;
+      background: #0a1726;
+      color: #ffffff;
+      font-size: 15px;
     }
-    input:focus { border-color: #36d6a0; }
-    button {
-      width: 100%;
-      margin-top: 22px;
-      padding: 14px;
+
+    input:focus {
+      border-color: #00d6a0;
+      box-shadow: 0 0 0 3px rgba(0, 214, 160, 0.12);
+    }
+
+    input::placeholder { color: #73869a; }
+
+    .password-wrap { position: relative; }
+
+    .password-wrap input { padding-right: 68px; }
+
+    .toggle {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 49px;
+      padding: 0 12px;
       border: 0;
-      border-radius: 9px;
-      background: #36d6a0;
-      color: #07111f;
+      background: transparent;
+      color: #00d6a0;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .terms {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      margin: 19px 0;
+      color: #b8c6d5;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .terms input {
+      width: 16px;
+      min-height: 16px;
+      margin-top: 2px;
+      accent-color: #00d6a0;
+    }
+
+    .terms label {
+      margin: 0;
+      font-weight: 400;
+    }
+
+    .submit {
+      width: 100%;
+      min-height: 51px;
+      border: 0;
+      border-radius: 12px;
+      background: linear-gradient(90deg, #00d6a0, #16b8cb);
+      color: #061421;
       font-size: 16px;
-      font-weight: bold;
+      font-weight: 800;
       cursor: pointer;
     }
-    #message {
-      margin-top: 15px;
-      line-height: 1.5;
-      overflow-wrap: anywhere;
-      font-size: 14px;
+
+    .submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
-    .signin {
+
+    .message {
+      display: none;
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 10px;
+      background: #33251a;
+      color: #ffd5a6;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .footer {
+      margin-top: 24px;
       text-align: center;
-      margin-top: 20px;
-      color: #b7c5d6;
+      color: #a8b8ca;
       font-size: 14px;
     }
-    a { color: #36d6a0; }
-    .note {
-      color: #a9b9cc;
-      font-size: 12px;
-      line-height: 1.5;
-      margin-top: 18px;
+
+    a {
+      color: #00d6a0;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .security {
+      margin-top: 20px;
+      color: #8295a9;
+      text-align: center;
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 360px) {
+      .card { padding: 26px 18px; }
+      h1 { font-size: 25px; }
     }
   </style>
 </head>
 <body>
   <main class="card">
-    <div class="logo">NEXA BOT</div>
-    <h1>Create Account</h1>
-    <p class="sub">Create your account to get started</p>
+    <div class="logo" aria-label="Nexa Bot">N</div>
 
-    <form id="registerForm">
-      <label for="name">Full Name</label>
-      <input id="name" type="text" autocomplete="name"
-        placeholder="Enter your full name" required>
+    <h1>Create Account</h1>
+    <p class="subtitle">
+      Join Nexa Bot and manage your account in one place.
+    </p>
+
+    <form id="signupForm">
+      <label for="fullName">Full Name</label>
+      <input
+        id="fullName"
+        name="fullName"
+        type="text"
+        placeholder="Enter your full name"
+        autocomplete="name"
+        minlength="2"
+        maxlength="80"
+        required
+      >
 
       <label for="mobile">Mobile Number</label>
-      <input id="mobile" type="tel" inputmode="numeric"
-        autocomplete="tel" placeholder="10-digit mobile number"
-        pattern="[0-9]{10}" maxlength="10" required>
+      <input
+        id="mobile"
+        name="mobile"
+        type="tel"
+        inputmode="numeric"
+        placeholder="Enter 10-digit mobile number"
+        autocomplete="tel-national"
+        pattern="[0-9]{10}"
+        maxlength="10"
+        required
+      >
 
-      <label for="password">Password</label>
-      <input id="password" type="password"
-        autocomplete="new-password" minlength="8"
-        placeholder="At least 8 characters" required>
+      <label for="password">Create Password</label>
+      <div class="password-wrap">
+        <input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="At least 8 characters"
+          autocomplete="new-password"
+          minlength="8"
+          maxlength="72"
+          required
+        >
+        <button class="toggle" type="button"
+          data-target="password">Show</button>
+      </div>
 
       <label for="confirmPassword">Confirm Password</label>
-      <input id="confirmPassword" type="password"
-        autocomplete="new-password"
-        placeholder="Enter password again" required>
+      <div class="password-wrap">
+        <input
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          placeholder="Enter password again"
+          autocomplete="new-password"
+          minlength="8"
+          maxlength="72"
+          required
+        >
+        <button class="toggle" type="button"
+          data-target="confirmPassword">Show</button>
+      </div>
 
-      <button type="submit">Create Account</button>
-      <div id="message" role="status" aria-live="polite"></div>
+      <div class="terms">
+        <input id="agree" type="checkbox" required>
+        <label for="agree">
+          I agree to the Terms of Service and Privacy Policy.
+        </label>
+      </div>
+
+      <button class="submit" type="submit">Create Account</button>
+
+      <div class="message" id="message" role="alert"></div>
     </form>
 
-    <p class="signin">
+    <p class="footer">
       Already have an account?
       <a href="signin.html">Sign In</a>
     </p>
 
-    <p class="note">
-      No OTP is requested on this form. Account registration
-      requires secure backend authentication to be configured.
+    <p class="security">
+      Your password should be private. Never share it with anyone.
     </p>
   </main>
 
   <script>
-    const form = document.getElementById("registerForm");
+    const form = document.getElementById("signupForm");
     const message = document.getElementById("message");
+    const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirmPassword");
 
-    form.addEventListener("submit", function(event) {
+    document.querySelectorAll(".toggle").forEach(button => {
+      button.addEventListener("click", () => {
+        const field = document.getElementById(button.dataset.target);
+        const show = field.type === "password";
+        field.type = show ? "text" : "password";
+        button.textContent = show ? "Hide" : "Show";
+      });
+    });
+
+    function showMessage(text) {
+      message.textContent = text;
+      message.style.display = "block";
+    }
+
+    confirmPassword.addEventListener("input", () => {
+      confirmPassword.setCustomValidity(
+        confirmPassword.value === password.value
+          ? ""
+          : "Passwords do not match."
+      );
+    });
+
+    password.addEventListener("input", () => {
+      confirmPassword.setCustomValidity(
+        confirmPassword.value === password.value
+          ? ""
+          : "Passwords do not match."
+      );
+    });
+
+    form.addEventListener("submit", event => {
       event.preventDefault();
+      message.style.display = "none";
 
-      const name = document.getElementById("name").value.trim();
-      const mobile = document.getElementById("mobile").value.trim();
-      const password = document.getElementById("password").value;
-      const confirmPassword =
-        document.getElementById("confirmPassword").value;
-
-      if (!name) {
-        message.textContent = "Please enter your name.";
+      if (password.value !== confirmPassword.value) {
+        confirmPassword.setCustomValidity("Passwords do not match.");
+        confirmPassword.reportValidity();
         return;
       }
 
-      if (!/^[0-9]{10}$/.test(mobile)) {
-        message.textContent =
-          "Enter a valid 10-digit mobile number.";
-        return;
-      }
-
-      if (password.length < 8) {
-        message.textContent =
-          "Password must be at least 8 characters.";
-        return;
-      }
-
-      if (password !== confirmPassword) {
-        message.textContent = "Passwords do not match.";
-        return;
-      }
-
-      message.textContent =
-        "Registration is not configured yet. A secure backend " +
-        "must be connected before an account can be created.";
+      showMessage(
+        "The form is valid, but account registration is not connected yet. " +
+        "Connect a secure authentication backend to create your account."
+      );
     });
   </script>
 </body>
 </html>
 
-<!doctype html>
-<html lang="hi">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Create Account | Nexa Bot</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <header class="top">
-    <a class="brand" href="index.html">
-      <span class="mark">N</span>
-      <span>NEXA<span class="gold">BOT</span>
-        <small>GOLD TRADING WORKSPACE</small>
-      </span>
-    </a>
-    <div class="actions">
-      <a class="btn outline" href="index.html">Home</a>
-      <a class="btn goldbtn" href="signin.html">Sign in</a>
-    </div>
-  </header>
-
-  <main class="pagewrap">
-    <section class="card">
-      <div class="eyebrow">CREATE ACCOUNT</div>
-      <h1>Welcome to Nexa Bot</h1>
-      <p>अपना नाम और मोबाइल नंबर डालकर डेमो अकाउंट बनाएँ।</p>
-
-      <form id="genericForm">
-        <label class="field">
-          <span>Full name</span>
-          <input name="name" autocomplete="name"
-            placeholder="आपका नाम" required>
-        </label>
-
-        <label class="field">
-          <span>Mobile number</span>
-          <input type="tel" name="phone" inputmode="tel"
-            autocomplete="tel" placeholder="98765 43210"
-            required minlength="10">
-        </label>
-
-        <label class="field">
-          <span>Email (optional)</span>
-          <input type="email" name="email"
-            autocomplete="email" placeholder="you@example.com">
-        </label>
-
-        <div class="notice">
-          यह डेमो अकाउंट है। जानकारी इसी ब्राउज़र में सेव हो सकती है।
-          OTP या सुरक्षित ऑनलाइन अकाउंट की सुविधा अभी नहीं है।
-          सार्वजनिक फोन पर निजी जानकारी न डालें।
-        </div>
-
-        <div class="message" id="message" role="status"></div>
-
-        <button class="btn goldbtn full" type="submit">
-          Create demo account →
-        </button>
-      </form>
-
-      <div class="switch">
-        पहले अकाउंट बनाया है?
-        <a href="signin.html">Sign in</a>
-      </div>
-    </section>
-  </main>
-
-  <script src="app.js"></script>
-</body>
-</html>
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Get Started | Nexa Bot</title><link rel="stylesheet" href="styles.css"></head><body><header class="top"><a class="brand" href="index.html"><span class="mark">N</span><span>NEXA<span class="gold">BOT</span><small>GOLD TRADING WORKSPACE</small></span></a><div class="actions"><a class="btn outline" href="index.html">Home</a><a class="btn goldbtn" href="signin.html">Sign in</a></div></header><main class="pagewrap"><section class="card"><div class="eyebrow">GET STARTED</div><h1>Welcome to Nexa Bot</h1><p>Enter your details to continue to the membership options.</p><form id="genericForm"><label class="field"><span>Full name</span><input name="name" autocomplete="name" placeholder="Your name" required></label><label class="field"><span>Mobile number (optional)</span><input type="tel" name="phone" inputmode="tel" autocomplete="tel" placeholder="+91 98765 43210"></label><label class="field"><span>Email (optional)</span><input type="email" name="email" autocomplete="email" placeholder="you@example.com"></label><div class="notice">This is a simple demo form. No password, OTP or authentication is required. Details are not saved or sent to a server in this version.</div><div class="message" id="message" role="status"></div><button class="btn goldbtn full" type="submit">Continue →</button></form><div class="switch">Want to explore first? <a href="index.html#plans">View memberships</a></div></section></main><script src="app.js"></script><script>document.getElementById('genericForm').addEventListener('submit',function(e){e.preventDefault();document.getElementById('message').textContent='Demo only: your details were not saved. Continue to the membership plans to explore Nexa Bot.';document.getElementById('message').className='message good';});</script></body></html>
