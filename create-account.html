@@ -1,4 +1,173 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account | Nexa Bot</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: #07111f;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+    .card {
+      width: 100%;
+      max-width: 420px;
+      padding: 28px;
+      background: #101e30;
+      border: 1px solid #263950;
+      border-radius: 18px;
+      box-shadow: 0 15px 45px #0005;
+    }
+    .logo {
+      text-align: center;
+      color: #36d6a0;
+      font-size: 30px;
+      font-weight: bold;
+    }
+    h1 { text-align: center; font-size: 25px; }
+    .sub { text-align: center; color: #a9b9cc; font-size: 14px; }
+    label {
+      display: block;
+      margin: 17px 0 7px;
+      font-size: 14px;
+    }
+    input {
+      width: 100%;
+      padding: 13px;
+      border-radius: 9px;
+      border: 1px solid #354b64;
+      background: #091525;
+      color: white;
+      font-size: 16px;
+      outline: none;
+    }
+    input:focus { border-color: #36d6a0; }
+    button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 14px;
+      border: 0;
+      border-radius: 9px;
+      background: #36d6a0;
+      color: #07111f;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #message {
+      margin-top: 15px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+      font-size: 14px;
+    }
+    .signin {
+      text-align: center;
+      margin-top: 20px;
+      color: #b7c5d6;
+      font-size: 14px;
+    }
+    a { color: #36d6a0; }
+    .note {
+      color: #a9b9cc;
+      font-size: 12px;
+      line-height: 1.5;
+      margin-top: 18px;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="logo">NEXA BOT</div>
+    <h1>Create Account</h1>
+    <p class="sub">Create your account to get started</p>
+
+    <form id="registerForm">
+      <label for="name">Full Name</label>
+      <input id="name" type="text" autocomplete="name"
+        placeholder="Enter your full name" required>
+
+      <label for="mobile">Mobile Number</label>
+      <input id="mobile" type="tel" inputmode="numeric"
+        autocomplete="tel" placeholder="10-digit mobile number"
+        pattern="[0-9]{10}" maxlength="10" required>
+
+      <label for="password">Password</label>
+      <input id="password" type="password"
+        autocomplete="new-password" minlength="8"
+        placeholder="At least 8 characters" required>
+
+      <label for="confirmPassword">Confirm Password</label>
+      <input id="confirmPassword" type="password"
+        autocomplete="new-password"
+        placeholder="Enter password again" required>
+
+      <button type="submit">Create Account</button>
+      <div id="message" role="status" aria-live="polite"></div>
+    </form>
+
+    <p class="signin">
+      Already have an account?
+      <a href="signin.html">Sign In</a>
+    </p>
+
+    <p class="note">
+      No OTP is requested on this form. Account registration
+      requires secure backend authentication to be configured.
+    </p>
+  </main>
+
+  <script>
+    const form = document.getElementById("registerForm");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const mobile = document.getElementById("mobile").value.trim();
+      const password = document.getElementById("password").value;
+      const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+      if (!name) {
+        message.textContent = "Please enter your name.";
+        return;
+      }
+
+      if (!/^[0-9]{10}$/.test(mobile)) {
+        message.textContent =
+          "Enter a valid 10-digit mobile number.";
+        return;
+      }
+
+      if (password.length < 8) {
+        message.textContent =
+          "Password must be at least 8 characters.";
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        message.textContent = "Passwords do not match.";
+        return;
+      }
+
+      message.textContent =
+        "Registration is not configured yet. A secure backend " +
+        "must be connected before an account can be created.";
+    });
+  </script>
+</body>
+</html>
+
 <!doctype html>
 <html lang="hi">
 <head>
