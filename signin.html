@@ -1,1 +1,105 @@
+
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign In | Nexa Bot</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html">
+      <span class="mark">N</span>
+      <span>NEXA<span class="gold">BOT</span>
+        <small>GOLD TRADING WORKSPACE</small>
+      </span>
+    </a>
+    <div class="actions">
+      <a class="btn outline" href="index.html">Home</a>
+      <a class="btn goldbtn" href="create-account.html">Create Account</a>
+    </div>
+  </header>
+
+  <main class="pagewrap">
+    <section class="card">
+      <div class="eyebrow">MEMBER ACCESS</div>
+      <h1>Welcome back</h1>
+      <p>अपने डेमो अकाउंट में प्रवेश करें।</p>
+
+      <form id="signinForm">
+        <label class="field">
+          <span>Mobile number</span>
+          <input type="tel" id="phone" name="phone"
+            inputmode="tel" autocomplete="tel"
+            placeholder="अपना मोबाइल नंबर डालें" required>
+        </label>
+
+        <div class="notice">
+          यह डेमो लॉगिन है। यह वास्तविक पहचान सत्यापित नहीं करता
+          और किसी सुरक्षित ऑनलाइन अकाउंट का विकल्प नहीं है।
+        </div>
+
+        <div id="message" class="message" role="status"></div>
+
+        <button class="btn goldbtn full" type="submit">
+          Sign In →
+        </button>
+      </form>
+
+      <div class="switch">
+        नया सदस्य हैं?
+        <a href="create-account.html">Create Account</a>
+      </div>
+      <div class="switch">
+        <a href="index.html">← Back to Home</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById("signinForm");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const phone = document.getElementById("phone").value.trim();
+      const digits = phone.replace(/\D/g, "");
+
+      if (digits.length < 10) {
+        message.textContent = "कृपया सही मोबाइल नंबर डालें।";
+        return;
+      }
+
+      const saved = localStorage.getItem("nexaDemoAccount");
+
+      if (!saved) {
+        message.textContent =
+          "डेमो अकाउंट नहीं मिला। पहले Create Account करें।";
+        return;
+      }
+
+      try {
+        const account = JSON.parse(saved);
+        const savedDigits = String(account.phone || "")
+          .replace(/\D/g, "");
+
+        if (digits !== savedDigits &&
+            digits.slice(-10) !== savedDigits.slice(-10)) {
+          message.textContent =
+            "यह मोबाइल नंबर बनाए गए डेमो अकाउंट से मेल नहीं खाता।";
+          return;
+        }
+
+        sessionStorage.setItem("nexaDemoSignedIn", "true");
+        window.location.href = "dashboard.html";
+      } catch (error) {
+        message.textContent =
+          "डेमो अकाउंट का डेटा पढ़ा नहीं जा सका।";
+      }
+    });
+  </script>
+</body>
+</html>
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Member Access | Nexa Bot</title><link rel="stylesheet" href="styles.css"></head><body><header class="top"><a class="brand" href="index.html"><span class="mark">N</span><span>NEXA<span class="gold">BOT</span><small>GOLD TRADING WORKSPACE</small></span></a><div class="actions"><a class="btn outline" href="index.html">Home</a><a class="btn goldbtn" href="create-account.html">Get started</a></div></header><main class="pagewrap"><section class="card"><div class="eyebrow">MEMBER WORKSPACE</div><h1>Continue to Nexa Bot</h1><p>This demo does not use accounts or authentication.</p><div class="notice">No login or password is required in this preview. The dashboard is a sample view; it does not show private member data or store account details.</div><a class="btn goldbtn full" href="dashboard.html">Open demo dashboard →</a><div class="switch"><a href="index.html">Return to homepage</a></div></section></main></body></html>
