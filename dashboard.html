@@ -1,1 +1,99 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nexa Bot | Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .dash-wrap{max-width:950px;margin:35px auto;padding:20px}
+    .dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+    .dash-card{padding:22px;margin:14px 0;border-radius:18px;
+      border:1px solid #343c49;background:#111820;color:#fff}
+    .dash-card h2{margin-top:8px}
+    .muted{color:#aab4c0}
+    .money{font-size:30px;color:#f5c451;font-weight:700}
+    .dash-link{color:#f5c451}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html">
+      <span class="mark">N</span>
+      <span>NEXA<span class="gold">BOT</span>
+        <small>MEMBER DASHBOARD</small>
+      </span>
+    </a>
+    <div class="actions">
+      <a class="btn outline" href="index.html">Home</a>
+      <button class="btn goldbtn" id="logout" type="button">Sign Out</button>
+    </div>
+  </header>
+
+  <main class="dash-wrap">
+    <p class="eyebrow">MEMBER AREA</p>
+    <h1>Welcome to Nexa Bot</h1>
+    <p class="muted">Your trading membership dashboard</p>
+
+    <section class="dash-grid">
+      <div class="dash-card">
+        <p class="muted">Account</p>
+        <h2 id="memberName">Member</h2>
+        <p id="memberPhone"></p>
+      </div>
+      <div class="dash-card">
+        <p class="muted">Virtual Reward Balance</p>
+        <div class="money" id="rewards">$0.00</div>
+        <p class="muted">Virtual rewards • Not withdrawable cash</p>
+      </div>
+    </section>
+
+    <section class="dash-card">
+      <h2>Subscription</h2>
+      <p id="subscription">No verified subscription yet.</p>
+      <a class="btn goldbtn" href="checkout.html">View Subscription Plans</a>
+    </section>
+
+    <section class="dash-card">
+      <h2>Gold Trading Tools</h2>
+      <p><a class="dash-link" href="signals.html">Gold Signals</a></p>
+      <p><a class="dash-link" href="integration.html">Trading Integrations</a></p>
+    </section>
+
+    <section class="dash-card">
+      <h2>Support</h2>
+      <p>Contact support for membership and account assistance.</p>
+    </section>
+  </main>
+
+  <script>
+    const saved = localStorage.getItem("nexaDemoAccount");
+    const signedIn = sessionStorage.getItem("nexaDemoSignedIn");
+
+    if (signedIn !== "true" || !saved) {
+      window.location.replace("signin.html");
+    } else {
+      try {
+        const account = JSON.parse(saved);
+        document.getElementById("memberName").textContent =
+          account.name || "Member";
+        document.getElementById("memberPhone").textContent =
+          account.phone || "";
+      } catch (e) {}
+    }
+
+    const balance = Number(
+      localStorage.getItem("nexaVirtualRewards") || 0
+    );
+    document.getElementById("rewards").textContent =
+      "$" + balance.toFixed(2);
+
+    document.getElementById("logout").addEventListener("click", () => {
+      sessionStorage.removeItem("nexaDemoSignedIn");
+      window.location.href = "signin.html";
+    });
+  </script>
+</body>
+</html>
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard | Nexa Bot</title><link rel="stylesheet" href="styles.css"></head><body><header class="top"><a class="brand" href="index.html"><span class="mark">N</span><span>NEXA<span class="gold">BOT</span><small>GOLD TRADING WORKSPACE</small></span></a><nav><a href="index.html#chart">Gold chart</a><a href="signals.html">Signals</a><a href="integration.html">MT4/MT5</a></nav><div class="actions"><a class="btn outline" href="signin.html">Sign in</a><a class="btn goldbtn" href="index.html#plans">Membership</a></div></header><main class="section"><div class="eyebrow">MEMBER WORKSPACE</div><h2>Rewards <span class="gold">dashboard.</span></h2><p class="lead">Your real points balance will be calculated by the secure backend after a membership payment is verified.</p><div class="balance"><small>NEXA REWARD POINTS</small><strong>— points</strong><span>No points have been credited in this preview. A verified transaction is required.</span></div><div class="dashgrid"><div class="dashitem"><small>Membership status</small><strong>Not activated</strong></div><div class="dashitem"><small>Pending payments</small><strong>0</strong></div><div class="dashitem"><small>Referral rewards</small><strong>Backend required</strong></div></div><div class="sectionhead"><div><div class="eyebrow">REFERRAL PROGRAM</div><h2 id="referrals">Invite & track.</h2></div><p>Referral code preview only. Real codes, attribution, anti-abuse checks and rewards must be generated and stored by the backend.</p></div><div class="card"><label class="field"><span>Demo referral code</span><div class="addressrow"><code id="referralCode">NEXA-DEMO-7K2Q</code><button class="copy" data-copy="NEXA-DEMO-7K2Q" type="button">Copy</button></div></label><div class="notice">Do not promise referral income or credit rewards until eligibility rules, fraud controls and server-side accounting are implemented.</div><a class="btn outline" href="index.html#plans">View memberships →</a></div></main><footer><a class="brand" href="index.html"><span class="mark">N</span><span>NEXA<span class="gold">BOT</span></span></a><p>Preview dashboard · Real account data not connected</p><div><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a></div></footer><script src="app.js"></script></body></html>
