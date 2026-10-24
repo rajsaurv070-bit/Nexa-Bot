@@ -1,1 +1,138 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nexa Bot | Subscription Plans</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .wrap{max-width:1000px;margin:35px auto;padding:20px}
+    .plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+    .plan{background:#111820;border:1px solid #343c49;border-radius:18px;padding:24px;color:#fff}
+    .price{font-size:32px;font-weight:800;color:#f5c451;margin:15px 0}
+    .muted{color:#aab4c0}
+    .note{padding:14px;border-radius:12px;background:#1c2530;margin:18px 0;color:#dce3ec}
+    .status{margin-top:15px;color:#f5c451}
+    .plan ul{padding-left:20px;line-height:1.9}
+    button{cursor:pointer}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html">
+      <span class="mark">N</span>
+      <span>NEXA<span class="gold">BOT</span>
+        <small>SUBSCRIPTION CENTER</small>
+      </span>
+    </a>
+    <div class="actions">
+      <a class="btn outline" href="dashboard.html">Dashboard</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <p class="eyebrow">MEMBERSHIP</p>
+    <h1>Choose Your Subscription</h1>
+    <p class="muted">Choose the plan that suits your trading needs.</p>
+
+    <div class="note">
+      Prices below are illustrative and are not an active payment offer.
+      No payment is collected on this page. A subscription activates only
+      after secure payment verification.
+    </div>
+
+    <section class="plans">
+      <article class="plan">
+        <h2>Monthly</h2>
+        <div class="price">$19.00</div>
+        <p class="muted">Billed monthly</p>
+        <ul>
+          <li>Gold trading tools</li>
+          <li>Member dashboard</li>
+          <li>Customer support</li>
+        </ul>
+        <button class="btn goldbtn full" type="button"
+          data-plan="Monthly" data-price="19">
+          Select Monthly
+        </button>
+      </article>
+
+      <article class="plan">
+        <h2>Quarterly</h2>
+        <div class="price">$49.00</div>
+        <p class="muted">Billed every 3 months</p>
+        <ul>
+          <li>Gold trading tools</li>
+          <li>Member dashboard</li>
+          <li>Customer support</li>
+        </ul>
+        <button class="btn goldbtn full" type="button"
+          data-plan="Quarterly" data-price="49">
+          Select Quarterly
+        </button>
+      </article>
+
+      <article class="plan">
+        <h2>Yearly</h2>
+        <div class="price">$149.00</div>
+        <p class="muted">Billed annually</p>
+        <ul>
+          <li>Gold trading tools</li>
+          <li>Member dashboard</li>
+          <li>Customer support</li>
+        </ul>
+        <button class="btn goldbtn full" type="button"
+          data-plan="Yearly" data-price="149">
+          Select Yearly
+        </button>
+      </article>
+    </section>
+
+    <section class="plan">
+      <h2>Order Summary</h2>
+      <p>Selected plan: <strong id="selectedPlan">None</strong></p>
+      <p>Amount: <strong id="selectedPrice">$0.00</strong></p>
+      <p class="muted">
+        Virtual Reward Balance: <strong id="rewardBalance">$0.00</strong>
+      </p>
+      <button id="continue" class="btn goldbtn" type="button" disabled>
+        Continue to Secure Payment
+      </button>
+      <p id="status" class="status" role="status"></p>
+    </section>
+  </main>
+
+  <script>
+    let selected = null;
+
+    document.querySelectorAll("[data-plan]").forEach(button => {
+      button.addEventListener("click", () => {
+        selected = {
+          name: button.dataset.plan,
+          price: Number(button.dataset.price)
+        };
+
+        document.getElementById("selectedPlan").textContent = selected.name;
+        document.getElementById("selectedPrice").textContent =
+          "$" + selected.price.toFixed(2);
+        document.getElementById("continue").disabled = false;
+        document.getElementById("status").textContent =
+          "Plan selected. Payment has not been made.";
+      });
+    });
+
+    const reward = Number(localStorage.getItem("nexaVirtualRewards") || 0);
+    document.getElementById("rewardBalance").textContent =
+      "$" + (Number.isFinite(reward) && reward >= 0 ? reward : 0).toFixed(2);
+
+    document.getElementById("continue").addEventListener("click", () => {
+      if (!selected) return;
+
+      document.getElementById("status").textContent =
+        "Secure payment is not configured yet. No payment has been taken.";
+    });
+  </script>
+</body>
+</html>
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Checkout | Nexa Bot</title><link rel="stylesheet" href="styles.css"></head><body><header class="top"><a class="brand" href="index.html"><span class="mark">N</span><span>NEXA<span class="gold">BOT</span><small>GOLD TRADING WORKSPACE</small></span></a><div class="actions"><a class="btn outline" href="index.html#plans">Back to plans</a></div></header><main class="pagewrap"><section class="card"><div class="eyebrow">MEMBERSHIP CHECKOUT</div><h1>Review your plan</h1><p>Payment verification is required before membership activation or points credit.</p><div class="balance"><small>SELECTED PLAN</small><strong id="planName">Monthly</strong><span id="planPrice">$69 / month</span><hr><b id="planPoints" class="gold">138 points</b><span> reward points after payment verification</span></div><form id="checkoutForm"><label class="field"><span>Email address</span><input type="email" name="email" required placeholder="you@example.com"></label><label class="field"><span>Payment network</span><select name="network" required><option value="">Select network</option><option>Bitcoin (BTC)</option><option>Ethereum (ETH)</option><option>Solana (SOL)</option><option>USDT — BNB Smart Chain (BEP20)</option></select></label><div class="address"><small>BTC address</small><div class="addressrow"><code>192JAnqo1Q7651mpZ77dLju3UUnaUpmd52</code><button class="copy" type="button" data-copy="192JAnqo1Q7651mpZ77dLju3UUnaUpmd52">Copy</button></div></div><div class="address"><small>ETH address</small><div class="addressrow"><code>0x7022f96acd1a5aC8C1275A5A63144df7f4E3A642</code><button class="copy" type="button" data-copy="0x7022f96acd1a5aC8C1275A5A63144df7f4E3A642">Copy</button></div></div><div class="address"><small>SOL address</small><div class="addressrow"><code>7RGXhC84w57h6DpQ9kXuJxaYK3G1W7kiDBHy4hzECcL7</code><button class="copy" type="button" data-copy="7RGXhC84w57h6DpQ9kXuJxaYK3G1W7kiDBHy4hzECcL7">Copy</button></div></div><div class="address"><small>USDT — BNB Smart Chain / BEP20</small><div class="addressrow"><code>0xa736aF37A899B4278d44dE4B839938b5803B0fD9</code><button class="copy" type="button" data-copy="0xa736aF37A899B4278d44dE4B839938b5803B0fD9">Copy</button></div></div><label class="field"><span>Transaction hash / ID</span><input name="txid" placeholder="Paste transaction hash after paying"></label><div class="notice">Verify the wallet and network independently before sending. Crypto transfers can be irreversible. These addresses have not been independently verified in this starter. The form does not process a payment or credit points.</div><div class="message" id="message" role="status"></div><button class="btn goldbtn full" type="submit">Submit for verification →</button></form></section></main><script src="app.js"></script></body></html>
